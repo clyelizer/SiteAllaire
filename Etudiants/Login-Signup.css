@@ -1,0 +1,169 @@
+/* Bloc message d'accueil */
+.welcome-message {
+    width: 100%;
+    max-width: 420px;
+    margin: 40px auto 20px auto;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    background: #f1ebeb;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 18px 24px;
+    letter-spacing: 0.2px;
+}
+
+@media (max-width: 460px) {
+    .welcome-message {
+        font-size: 16px;
+        padding: 14px 10px;
+        margin: 20px auto 10px auto;
+    }
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+.container {
+    position: relative;
+    width: 420px;
+    height: 520px;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 5px 15px rgba(0, 51, 102, 0.10);
+    overflow: hidden;
+}
+
+.form-box {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    background: #fff;
+    transition: transform 0.6s ease;
+}
+
+.form-box.login {
+    transform: translateX(0);
+}
+
+.form-box.register {
+    transform: translateX(100%);
+}
+
+.container.active .form-box.login {
+    transform: translateX(-100%);
+}
+
+.container.active .form-box.register {
+    transform: translateX(0);
+}
+
+h1 {
+    font-size: 32px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.input-box {
+    position: relative;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.input-box input {
+    width: 100%;
+    height: 50px;
+    padding: 10px 50px 10px 20px;
+    background: #f5f5f5;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.input-box input:focus {
+    border-color: #003366;
+    background: #fff;
+}
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #999;
+}
+
+.btn {
+    width: 100%;
+    height: 50px;
+    background: #003366;
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #ffcc00;
+    color: #003366;
+}
+
+.switch {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.switch p {
+    color: #666;
+    font-size: 15px;
+}
+
+.switch a {
+    color: #003366;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.switch a:hover {
+    color: #ffcc00;
+}
+
+@media (max-width: 460px) {
+    .container {
+        width: 90%;
+        height: 500px;
+    }
+    
+    .form-box {
+        padding: 30px;
+    }
+    
+    h1 {
+        font-size: 28px;
+        margin-bottom: 25px;
+    }
+}
