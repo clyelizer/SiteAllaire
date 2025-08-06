@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Presentation du lycee michel allaire de Segou" >
+    <title>Lycée Michel Allaire - Ségou</title>
+    <!-- Favicon pour l'onglet du navigateur -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Barre de navigation */
+        .navbar {
+            background-color: #021f5b;
+            padding: 8px 5px 3px 5px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 51, 102, 0.2);
+        }
+        .hamburger {
+            display: none;
+            font-size: 1.5em;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .nav-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .nav-menu li {
+            margin: 5px;
+        }
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            background-color: #2d0883;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            display: block;
+        }
+        .nav-menu a:hover {
+            color: #ffcc00;
+        }
+        /* Dropdown menu for mobile */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                background-color: #021f5b;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 10px 0;
+                box-shadow: 0 4px 8px rgba(0, 51, 102, 0.2);
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .nav-menu li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            .nav-menu a {
+                font-size: 1em;
+                padding: 8px;
+            }
+        }
+
+        /* En-tête */
+        .header {
+            background-color: #003366;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 51, 102, 0.2);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .header p {
+            margin-top: 5px;
+            font-size: 1em;
+        }
+
+        /* Bouton générique */
+        .btn {
+            background-color: #ffcc00;
+            color: #003366;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            font-size: 0.9em;
+        }
+        .btn:hover {
+            background-color: #e6b800;
+        }
+
+        /* Section générique */
+        .section {
+            padding: 20px 15px;
+            margin: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 51, 102, 0.2);
+        }
+        .section h2 {
+            color: #003366;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .section p {
+            max-width: 90%;
+            margin: 0 auto 15px auto;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        /* Section Mot du Proviseur */
+        .proviseur-section {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .proviseur-section img {
+            max-width: 150px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .proviseur-text {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        /* Section Pourquoi Nous Rejoindre */
+        .join-section .contact-form {
+            max-width: 90%;
+            margin: 15px auto;
+        }
+        .join-section .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .join-section .contact-form input,
+        .join-section .contact-form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .join-section .map {
+            max-width: 100%;
+            margin: 15px auto;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Section Chiffres Clés */
+        .stats-section {
+            text-align: center;
+        }
+        .stats-year {
+            margin: 15px 0;
+        }
+        .stats-year h3 {
+            color: #003366;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+        .stats-table-container {
+            overflow-x: auto;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .stats-table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85em;
+        }
+        .stats-table th, .stats-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .stats-table th {
+            background-color: #003366;
+            color: white;
+        }
+        .stats-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Section Nos Exploits */
+        .exploits-section {
+            text-align: center;
+        }
+        .exploits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        .exploits-card {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .exploits-card img {
+            max-width: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .exploits-card h3 {
+            margin: 8px 0;
+            font-size: 1.1em;
+            color: #003366;
+        }
+
+        /* Section Témoignages */
+        .testimonials-section {
+            text-align: center;
+        }
+        .testimonial {
+            background-color: #f1f1f1;
+            padding: 15px;
+            margin: 15px auto;
+            max-width: 90%;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .testimonial::before {
+            content: '“';
+            font-size: 2.5em;
+            color: #ffcc00;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+        }
+        .testimonial p {
+            font-style: italic;
+            font-size: 0.9em;
+        }
+        .testimonial-author {
+            font-weight: bold;
+            color: #003366;
+            margin-top: 8px;
+            font-size: 0.85em;
+        }
+
+        /* Section Équipe des Professeurs */
+        .team-section {
+            text-align: center;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        .team-card {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .team-card img {
+            max-width: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .team-card h3 {
+            margin: 8px 0;
+            font-size: 1.1em;
+            color: #003366;
+        }
+        .team-card p {
+            margin: 5px 0;
+            font-size: 0.85em;
+        }
+
+        /* Section Partenaires */
+        .partners-section {
+            text-align: center;
+        }
+        .partners-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        .partner-item {
+            background-color: #f1f1f1;
+            padding: 12px;
+            border-radius: 8px;
+            width: 180px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        /* Pied de page */
+        .footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+        .footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsivité */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .header p {
+                font-size: 0.9em;
+            }
+            .section {
+                margin: 10px;
+                padding: 15px;
+            }
+            .section h2 {
+                font-size: 1.5em;
+            }
+            .proviseur-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .proviseur-section img {
+                max-width: 120px;
+            }
+            .stats-table {
+                font-size: 0.75em;
+            }
+            .stats-table th, .stats-table td {
+                padding: 6px;
+            }
+            .exploits-grid, .team-grid {
+                grid-template-columns: 1fr;
+            }
+            .join-section .contact-form {
+                max-width: 95%;
+            }
+            .join-section .map {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+            .header p {
+                font-size: 0.85em;
+            }
+            .section h2 {
+                font-size: 1.3em;
+            }
+            .section p {
+                font-size: 0.9em;
+            }
+            .btn {
+                padding: 6px 12px;
+                font-size: 0.85em;
+            }
+            .stats-table {
+                font-size: 0.7em;
+            }
+            .exploits-card img, .team-card img {
+                max-width: 60px;
+            }
+            .testimonial::before {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <button class="hamburger">☰</button>
+        <ul class="nav-menu">
+            <li><a href="index.html">Retour</a></li>
+            <li><a href="#provisseur">Mot du Proviseur</a></li>
+            <li><a href="#join">Pourquoi Nous Rejoindre</a></li>
+            <li><a href="#stats">Chiffres Clés</a></li>
+            <li><a href="#exploits">Nos Exploits</a></li>
+            <li><a href="#testimonials">Témoignages</a></li>
+            <li><a href="#team">Équipe</a></li>
+            <li><a href="#partners">Partenaires</a></li>
+        </ul>
+    </nav>
+
+    <header class="header">
+        <h1>Lycée Michel Allaire</h1>
+        <p>L’excellence au cœur de l’éducation à Ségou</p>
+    </header>
+
+    <section id="presentation" class="section presentation-section">
+        <h2>Bienvenue au Lycée Michel Allaire</h2>
+        <p>
+            <strong>Aw Bissimila</strong> – Situé dans la vibrante « Cité des Balanzans », sur les rives du fleuve Niger, le Lycée Michel Allaire est un pilier de l’éducation à Ségou. Guidés par notre devise <strong>« Union - Travail - Discipline »</strong>, nous offrons une éducation de qualité dans les filières TSE (Sciences Économiques), TSExp (Sciences Expérimentales), TSS (Sciences Sociales), TSEco (Techniques Économiques), et TLL (Lettres). Notre mission est de former les leaders de demain, en encourageant chaque élève à explorer son potentiel, à cultiver sa curiosité intellectuelle et à développer son esprit critique dans un environnement inclusif et respectueux.
+        </p>
+        <p>
+            Nos élèves brillent dans des compétitions comme « Génie en Herbe », où nous avons remporté la finale nationale, et participent à des activités culturelles liées au Festival sur le Niger, renforçant leur lien avec le riche patrimoine bambara de Ségou. Nous préparons nos élèves au baccalauréat et à des carrières prometteuses, tout en contribuant au développement durable de la région.
+        </p>
+        <a href="#join" class="btn">Découvrez comment nous rejoindre</a>
+    </section>
+
+    <section id="provisseur" class="section proviseur-section">
+        <h2>Mot du Proviseur</h2>
+        <div class="proviseur-section">
+            <img src="placeholder_provisseur.jpg" alt="Zantigui Sidibé, Proviseur">
+            <div class="proviseur-text">
+                <p>
+                    « Au Lycée Michel Allaire, nous croyons que l’éducation est la clé d’un avenir prospère. En tant que proviseur, je m’engage à offrir à nos élèves un cadre d’apprentissage qui allie rigueur académique, innovation et valeurs humaines. Notre objectif est de former des jeunes responsables, capables de contribuer au développement de Ségou et du Mali, tout en célébrant notre riche héritage culturel. Ensemble, construisons un avenir d’excellence ! »<br>
+                    – Zantigui Sidibé, Proviseur
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="stats" class="section stats-section">
+        <h2>Chiffres Clés</h2>
+        <p>Le Lycée Michel Allaire excelle dans la préparation au baccalauréat. Voici les résultats des 5 dernières années pour les filières TSE, TSExp, TSS, TSEco, et TLL, incluant le nombre de candidats présentés, admis, mentions Assez Bien (12-13.99/20), Bien (14-15.99/20), et le pourcentage de réussite. <em>(Données indicatives, veuillez contacter l’établissement pour les chiffres officiels.)</em></p>
+               
+        <!-- <div class="stats-year">
+            <h3>2024</h3>
+            <div class="stats-table-container">
+                <table class="stats-table">
+                    <tr>
+                        <th>Filière</th>
+                        <th>Présentés</th>
+                        <th>Admis</th>
+                        <th>Pourcentage</th>
+                        <th>Mention Assez Bien</th>
+                        <th>Mention Bien</th>
+                    </tr>
+                    <tr>
+                        <td>TSE</td>
+                        <td>120</td>
+                        <td>108</td>
+                        <td>90.00%</td>
+                        <td>25</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td>TSExp</td>
+                        <td>100</td>
+                        <td>90</td>
+                        <td>90.00%</td>
+                        <td>20</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>TSS</td>
+                        <td>80</td>
+                        <td>72</td>
+                        <td>90.00%</td>
+                        <td>18</td>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <td>TSEco</td>
+                        <td>60</td>
+                        <td>54</td>
+                        <td>90.00%</td>
+                        <td>15</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>TLL</td>
+                        <td>70</td>
+                        <td>63</td>
+                        <td>90.00%</td>
+                        <td>16</td>
+                        <td>6</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="stats-year">
+            <h3>2023</h3>
+            <div class="stats-table-container">
+                <table class="stats-table">
+                    <tr>
+                        <th>Filière</th>
+                        <th>Présentés</th>
+                        <th>Admis</th>
+                        <th>Pourcentage</th>
+                        <th>Mention Assez Bien</th>
+                        <th>Mention Bien</th>
+                    </tr>
+                    <tr>
+                        <td>TSE</td>
+                        <td>115</td>
+                        <td>103</td>
+                        <td>89.57%</td>
+                        <td>23</td>
+                        <td>11</td>
+                    </tr>
+                    <tr>
+                        <td>TSExp</td>
+                        <td>95</td>
+                        <td>85</td>
+                        <td>89.47%</td>
+                        <td>18</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td>TSS</td>
+                        <td>75</td>
+                        <td>67</td>
+                        <td>89.33%</td>
+                        <td>16</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>TSEco</td>
+                        <td>55</td>
+                        <td>49</td>
+                        <td>89.09%</td>
+                        <td>13</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>TLL</td>
+                        <td>65</td>
+                        <td>58</td>
+                        <td>89.23%</td>
+                        <td>14</td>
+                        <td>5</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="stats-year">
+            <h3>2022</h3>
+            <div class="stats-table-container">
+                <table class="stats-table">
+                    <tr>
+                        <th>Filière</th>
+                        <th>Présentés</th>
+                        <th>Admis</th>
+                        <th>Pourcentage</th>
+                        <th>Mention Assez Bien</th>
+                        <th>Mention Bien</th>
+                    </tr>
+                    <tr>
+                        <td>TSE</td>
+                        <td>110</td>
+                        <td>99</td>
+                        <td>90.00%</td>
+                        <td>22</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>TSExp</td>
+                        <td>90</td>
+                        <td>81</td>
+                        <td>90.00%</td>
+                        <td>17</td>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <td>TSS</td>
+                        <td>70</td>
+                        <td>63</td>
+                        <td>90.00%</td>
+                        <td>15</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>TSEco</td>
+                        <td>50</td>
+                        <td>45</td>
+                        <td>90.00%</td>
+                        <td>12</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>TLL</td>
+                        <td>60</td>
+                        <td>54</td>
+                        <td>90.00%</td>
+                        <td>13</td>
+                        <td>4</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="stats-year">
+            <h3>2021</h3>
+            <div class="stats-table-container">
+                <table class="stats-table">
+                    <tr>
+                        <th>Filière</th>
+                        <th>Présentés</th>
+                        <th>Admis</th>
+                        <th>Pourcentage</th>
+                        <th>Mention Assez Bien</th>
+                        <th>Mention Bien</th>
+                    </tr>
+                    <tr>
+                        <td>TSE</td>
+                        <td>105</td>
+                        <td>95</td>
+                        <td>90.48%</td>
+                        <td>20</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td>TSExp</td>
+                        <td>85</td>
+                        <td>77</td>
+                        <td>90.59%</td>
+                        <td>16</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>TSS</td>
+                        <td>65</td>
+                        <td>58</td>
+                        <td>89.23%</td>
+                        <td>14</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>TSEco</td>
+                        <td>45</td>
+                        <td>40</td>
+                        <td>88.89%</td>
+                        <td>10</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>TLL</td>
+                        <td>55</td>
+                        <td>49</td>
+                        <td>89.09%</td>
+                        <td>12</td>
+                        <td>3</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="stats-year">
+            <h3>2020</h3>
+            <div class="stats-table-container">
+                <table class="stats-table">
+                    <tr>
+                        <th>Filière</th>
+                        <th>Présentés</th>
+                        <th>Admis</th>
+                        <th>Pourcentage</th>
+                        <th>Mention Assez Bien</th>
+                        <th>Mention Bien</th>
+                    </tr>
+                    <tr>
+                        <td>TSE</td>
+                        <td>100</td>
+                        <td>95</td>
+                        <td>95.00%</td>
+                        <td>22</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>TSExp</td>
+                        <td>80</td>
+                        <td>76</td>
+                        <td>95.00%</td>
+                        <td>18</td>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <td>TSS</td>
+                        <td>60</td>
+                        <td>57</td>
+                        <td>95.00%</td>
+                        <td>15</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>TSEco</td>
+                        <td>40</td>
+                        <td>38</td>
+                        <td>95.00%</td>
+                        <td>10</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>TLL</td>
+                        <td>50</td>
+                        <td>47</td>
+                        <td>94.00%</td>
+                        <td>12</td>
+                        <td>3</td>
+                    </tr>
+                </table>
+            </div>
+        </div>  -->
+    </section>
+
+    <section id="join" class="section join-section">
+        <h2>Pourquoi Nous Rejoindre</h2>
+        <p>
+            Le Lycée Michel Allaire est plus qu’un établissement scolaire : c’est une communauté dynamique où l’excellence académique rencontre la richesse culturelle de Ségou. Nos programmes variés (TSE, TSExp, TSS, TSEco, TLL) préparent les élèves au baccalauréat et à des carrières dans des secteurs clés comme l’économie, l’agriculture, ou les lettres. Nos partenariats avec des institutions comme le Conseil Régional de Ségou et l’APEJ offrent des opportunités uniques, comme des formations professionnelles et des microcrédits pour les jeunes entrepreneurs. Rejoignez-nous pour grandir dans un environnement qui valorise la discipline, la créativité, et l’engagement communautaire.
+        </p>
+        <h3>Comment Nous Joindre</h3>
+        <p>
+            Situé à Ségou, sur la rive droite du fleuve Niger, à 240 km de Bamako, le Lycée Michel Allaire est au cœur de la « Cité des Balanzans ». Découvrez notre localisation : 
+            <a href="https://maps.google.com/?q=Ségou,+Mali" target="_blank" class="btn">Voir sur Google Maps</a>
+        </p>
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.9999999999995!2d-6.279999999999999!3d13.431999999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDI1JzU0LjgiTiA2wrAxNic0OC4wIlc!5e0!3m2!1sfr!2sml!4v1699999999999!5m2!1sfr!2sml" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <form class="contact-form" action="mailto:contact@lyceemichelallaire.ml" method="post" enctype="text/plain">
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+            <button type="submit" class="btn">Envoyer</button>
+        </form>
+    </section>
+
+    <section id="exploits" class="section exploits-section">
+        <h2>Nos Exploits</h2>
+        <p>Le Lycée Michel Allaire est fier de ses anciens élèves qui ont poursuivi leurs études à l’étranger, ouvrant la voie à des carrières internationales. Voici quelques exemples de nos bacheliers ayant brillé à l’international :</p>
+        <div class="exploits-grid">
+            <div class="exploits-card">
+                <img src="placeholder_student1.jpg" alt="Mohamed Maiga">
+                <h3>Mohamed Maiga</h3>
+                <p>Filière TSE, 2015</p>
+                <p>Études en développement territorial, France</p>
+                <p>Après un baccalauréat avec mention Bien, Mohamed a intégré une université française et travaille aujourd’hui dans le développement international.</p>
+            </div>
+            <div class="exploits-card">
+                <img src="placeholder_student2.jpg" alt="Aïssata Koné">
+                <h3>Aïssata Koné</h3>
+                <p>Filière TSEco, 2020</p>
+                <p>Formation en agronomie, Canada</p>
+                <p>Aïssata a poursuivi des études en gestion agricole durable à l’Université de Montréal.</p>
+            </div>
+            <div class="exploits-card">
+                <img src="placeholder_student3.jpg" alt="Issa Diallo">
+                <h3>Issa Diallo</h3>
+                <p>Filière TSExp, 2022</p>
+                <p>Ingénierie, Maroc</p>
+                <p>Issa a intégré une école d’ingénieurs à Rabat grâce à son excellence académique.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="section testimonials-section">
+        <h2>Témoignages et Avis d’Anciens</h2>
+        <p>Nos anciens élèves partagent leur expérience et l’impact du Lycée Michel Allaire sur leur parcours. Vous êtes un ancien ? <a href="#join" class="btn">Partagez votre témoignage</a></p>
+        <div class="testimonial">
+            <p>« Le Lycée Michel Allaire m’a donné les bases solides pour réussir mon baccalauréat et poursuivre mes études en France. Les professeurs m’ont appris la rigueur et l’amour du travail bien fait. Ségou et ses valeurs restent toujours dans mon cœur. »</p>
+            <p class="testimonial-author">– Mohamed Maiga, Promotion 2015</p>
+        </div>
+        <div class="testimonial">
+            <p>« Grâce aux cours techniques en agriculture, j’ai pu développer des compétences pratiques qui m’ont ouvert les portes d’une formation au Canada. L’ambiance du lycée et les activités culturelles m’ont aussi appris à valoriser notre patrimoine. »</p>
+            <p class="testimonial-author">– Aïssata Koné, Promotion 2020</p>
+        </div>
+        <div class="testimonial">
+            <p>« Participer à ‘Génie en Herbe’ a été une expérience marquante. Le lycée m’a appris à croire en moi et à viser haut, ce qui m’a aidé à intégrer une école d’ingénieurs au Maroc. »</p>
+            <p class="testimonial-author">– Issa Diallo, Promotion 2022</p>
+        </div>
+    </section>
+
+    <section id="team" class="section team-section">
+        <h2>Quelques Membres de Notre Équipe</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="placeholder_teacher1.jpg" alt="Aminata Traoré">
+                <h3>Aminata Traoré</h3>
+                <p>Professeure de Sciences</p>
+                <p>Spécialisée en biologie, elle inspire ses élèves à explorer les sciences naturelles.</p>
+            </div>
+            <div class="team-card">
+                <img src="placeholder_teacher2.jpg" alt="Moussa Diarra">
+                <h3>Moussa Diarra</h3>
+                <p>Professeur de Techniques Agricoles</p>
+                <p>Expert en agro-sylvopastoral, il forme les élèves aux pratiques durables.</p>
+            </div>
+            <div class="team-card">
+                <img src="placeholder_teacher3.jpg" alt="Fatoumata Keïta">
+                <h3>Fatoumata Keïta</h3>
+                <p>Professeure de Littérature</p>
+                <p>Passionnée par les lettres, elle anime le club de débat du lycée.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners" class="section partners-section">
+        <h2>Nos Partenaires</h2>
+        <div class="partners-list">
+            <div class="partner-item">
+                <p>Conseil Régional de Ségou</p>
+            </div>
+            <div class="partner-item">
+                <p>Agence Malienne pour la Promotion de l’Emploi des Jeunes (APEJ)</p>
+            </div>
+            <div class="partner-item">
+                <p>Ministère de l’Éducation Nationale</p>
+            </div>
+            <div class="partner-item">
+                <p>ONG Éducation Sans Frontières</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 Lycée Michel Allaire. Tous droits réservés.</p>
+        <p>Suivez-nous sur <a href="https://www.facebook.com/Lyc%C3%A9e-Michel-Allaire-S%C3%A9gou-103093498135162/">Facebook</a></p>
+    </footer>
+    <script>
+        // Toggle dropdown menu
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+
+        // Fermer la navbar après avoir cliqué sur un lien d'ancre
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-menu').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
